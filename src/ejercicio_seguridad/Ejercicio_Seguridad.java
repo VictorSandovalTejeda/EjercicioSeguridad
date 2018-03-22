@@ -40,12 +40,12 @@ public class Ejercicio_Seguridad {
                 switch (option) {
                     case 1:
                         System.out.println();
-                        System.out.println(Console_Colors.ANSI_PURPLE + "1. Ingresar al Sistema" + Console_Colors.ANSI_RESET);
+                        System.out.println("<::: " + Console_Colors.ANSI_PURPLE + "INGRESAR AL SISTEMA" + Console_Colors.ANSI_RESET + " :::>");
                         o.opcionIngresar();
                         break;
                     case 2:
                         System.out.println();
-                        System.out.println(Console_Colors.ANSI_PURPLE + "2. Registrarse" + Console_Colors.ANSI_RESET);
+                        System.out.println("<::: " + Console_Colors.ANSI_PURPLE + "REGISTRARSE" + Console_Colors.ANSI_RESET + " :::>");
                         o.opcionRegistrar();
                         break;
                     case 3:
