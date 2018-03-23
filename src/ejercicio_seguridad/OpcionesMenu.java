@@ -29,6 +29,7 @@ public class OpcionesMenu {
         String userPass = null;
         String registrar = null;
         int contador = 0;
+        
 
         do {
             try {
@@ -42,6 +43,9 @@ public class OpcionesMenu {
                     if (c.validateUser(user)) {
                         do {
                             System.out.printf("%-60s%-26s%n", "Ingrese su Contraseña:", Console_Colors.ANSI_BLUE + "←Ingrese <0> para regresar" + Console_Colors.ANSI_RESET);
+                            /*Console console = System.console();
+                            char[] passwordChars = console.readPassword();
+                            password = new String(passwordChars);*/
                             password = sc.nextLine();
                             if (password.equals("0")) {
 
@@ -110,9 +114,15 @@ public class OpcionesMenu {
                 if (utilizar.equalsIgnoreCase("S")) {
                     email = user;
                 } else if (utilizar.equalsIgnoreCase("N")) {
-                    System.out.println("Ingrese su Correo Electrónico:");
-                    System.out.print(">> ");
-                    email = sc.nextLine();
+                    do {
+                        System.out.println("Ingrese su Correo Electrónico:");
+                        System.out.print(">> ");
+                        email = sc.nextLine();
+                        if (e.validateEmail(email)== false) {
+                            System.out.println(Console_Colors.ANSI_RED + "**Su Correo no tiene un formato valido." + Console_Colors.ANSI_RESET);
+                            System.out.println();
+                        }
+                    } while (e.validateEmail(email)== false);
                 } else {
                     System.out.println(Console_Colors.ANSI_RED + "**Respuesta no Valida, favor escribir unicamente <S> o <N>." + Console_Colors.ANSI_RESET);
                 }
@@ -131,6 +141,7 @@ public class OpcionesMenu {
                 } while (confirmacion != 1);
 
                 c.insertarUsuario(email, password2);
+                user = "0";
 
             } catch (InputMismatchException e) {
                 System.out.println(Console_Colors.ANSI_RED + "**Ingreso un dato Invalido." + Console_Colors.ANSI_RESET);
@@ -148,16 +159,39 @@ public class OpcionesMenu {
 
         do {
             try {
+                do{
                 System.out.println("Ingrese su Correo Electrónico:");
                 System.out.print(">> ");
                 email = sc.nextLine();
+                    if (e.validateEmail(email) == false) {
+                        System.out.println(Console_Colors.ANSI_RED + "**Su Correo no tiene un formato valido." + Console_Colors.ANSI_RESET);
+                        System.out.println();
+                    }
+                
+                }while (e.validateEmail(email) == false);
+                do {
+                    System.out.println("Ingrese su Contraseña: ");
+                    System.out.print(">> ");
+                    password = sc.nextLine();
+                    System.out.println("Confirme su Contraseña: ");
+                    System.out.print(">> ");
+                    password2 = sc.nextLine();
+                    if (password.equals(password2)) {
+                        confirmacion = 1;
+                    } else {
+                        System.out.println(Console_Colors.ANSI_RED + "**Error en la confirmacion" + Console_Colors.ANSI_RESET);
+                    }
+                } while (confirmacion != 1);
+                
+                c.insertarUsuario(email, password2);
+                email = "0";
 
             } catch (InputMismatchException e) {
                 System.out.println(Console_Colors.ANSI_RED + "**Ingreso un dato Invalido." + Console_Colors.ANSI_RESET);
                 System.out.println();
                 sc.nextLine();
             }
-        } while (true);
+        } while (!email.equals("0"));
 
     }
 

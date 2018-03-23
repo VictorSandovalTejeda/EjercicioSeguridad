@@ -36,47 +36,6 @@ public class Email {
         return matcher.find();
     }
     
-    public void sendEmail (String correoNotificar, String nombreEvento, String descripcionEvento ){
-        try{
-            String host ="smtp.gmail.com" ;
-            String user = emailUser;
-            String pass = emailPass;
-            String to = correoNotificar;
-            String from = emailUser;
-            String subject = nombreEvento;
-            String messageText = descripcionEvento;
-            boolean sessionDebug = false;
-
-            Properties props = System.getProperties();
-
-            props.put("mail.smtp.starttls.enable", "true");
-            props.put("mail.smtp.host", host);
-            props.put("mail.smtp.port", "587");
-            props.put("mail.smtp.auth", "true");
-            props.put("mail.smtp.starttls.required", "true");
-
-            java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
-            Session mailSession = Session.getDefaultInstance(props, null);
-            mailSession.setDebug(sessionDebug);
-            Message msg = new MimeMessage(mailSession);
-            msg.setFrom(new InternetAddress(from));
-            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(correoNotificar));
-            msg.setSubject(subject); msg.setSentDate(new Date());
-            msg.setText(messageText);
-
-           Transport transport=mailSession.getTransport("smtp");
-           transport.connect(host, user, pass);
-           transport.sendMessage(msg, msg.getAllRecipients());
-           transport.close();
-           System.out.println(Console_Colors.ANSI_GREEN + "Mensaje Enviado!" + Console_Colors.ANSI_RESET);
-        }catch(Exception ex)
-        {
-            System.out.println(Console_Colors.ANSI_RED + "Mensaje no fue enviado." + Console_Colors.ANSI_RESET);
-            System.out.println(ex);
-        }
-    }
-    
-    
     public void sendWarning (String correoNotificar){
         try{
             String host ="smtp.gmail.com" ;

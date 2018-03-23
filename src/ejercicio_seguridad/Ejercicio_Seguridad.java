@@ -34,7 +34,7 @@ public class Ejercicio_Seguridad {
                 System.out.println("2. Registrarse");
                 System.out.println("3. Salir");
                 System.out.println("--------------------------------------------");
-                System.out.print(">>");
+                System.out.print(">> ");
                 option = sc.nextInt();
                 
                 switch (option) {
